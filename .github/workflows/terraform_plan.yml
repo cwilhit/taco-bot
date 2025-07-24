@@ -12,6 +12,9 @@ on:
 
 jobs:
   tacos-gha:
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     uses: getsentry/tacos-gha/.github/workflows/tacos_plan.yml@stable
     with:
       tacos_gha_ref: refs/heads/stable
