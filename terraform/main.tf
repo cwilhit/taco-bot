@@ -4,7 +4,7 @@ module "s3-bucket" {
 }
 
 provider "aws" {
-  region = "us-west-2"
+  region = "us-west-1"
 
   default_tags {
     tags = var.s3_tags
