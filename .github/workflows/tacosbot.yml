@@ -1,0 +1,31 @@
+name: TacosBot
+
+permissions:
+  contents: write # Needed to create repository dispatch to trigger plans/applies
+  pull-requests: read
+  actions: write
+  deployments: write
+  statuses: write
+  issues: read
+
+on:
+  pull_request:
+    types: [opened, synchronize, closed]
+  issue_comment:
+    types: [created]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            ${{ env.config_file }}
+          sparse-checkout-cone-mode: false
+      - name: Run TacoBot
+        uses: TheTacosBot/TheTacosBot@main
+        with:
+          config_file: .tacosbot.yaml # You can customize this name.
+          github_token: ${{ github.token }}
